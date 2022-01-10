@@ -5,3 +5,10 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 ## Recommended IDE Setup
 
 - [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+
+
+# Installing Tailwind CSS  
+
+[Tailwind Installation wuth vue3 and Vite](https://tailwindcss.com/docs/guides/vite) -- >> Might differe at the time if this read ir implmentation 
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
