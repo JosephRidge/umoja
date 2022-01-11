@@ -41,7 +41,7 @@
           v-model="userPassword"
           type="password"
           placeholder="*******"
-          class="rounded-2xl h-12 w-80 text-center text-textgray"
+          class="rounded-2xl h-12 w-80 text-center text-textgray focus:primaryYellow"
         />
       </div>
       <button
@@ -78,10 +78,11 @@
           text-xs text-center
           underline
           text-darkgray
+          capitalize
         "
         v-on:click="switchAction"
       >
-        No Account ? Sign Up
+        {{ actionNoAccount }}
       </button>
     </div>
   </div>
@@ -89,7 +90,7 @@
 
 <script>
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 export default {
   data() {
@@ -97,16 +98,31 @@ export default {
       userEmail: "",
       userPassword: "",
       actionPriorValidation: "Login",
+      actionNoAccount:"No Account ? Sign Up",
       action: 0
     };
   },
   mounted() {},
   methods: {
     validateUser(auth) {
-      let email = this.userEmail;
-      console.log("email, ", email);
-      this.actionProirValidation = "Login";
-      this.action = 0 
+      let email = this.userEmail; 
+      let password = this.userPassword;
+      signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) =>{
+        const user = userCredential.user
+        console.log("credential = >  ", user.uid)
+      })
+      .catch((error)=>{
+           const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(
+            "errorr === > ",
+            errorMessage,
+            "error message --- > ",
+            errorCode
+          );
+        });
+
     },
     registerNewUser(auth) {
       console.log("clicked", this.userPassword);
@@ -116,6 +132,7 @@ export default {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
+        console.log("credential = >  ", user.uid)
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -129,10 +146,18 @@ export default {
         });
     },
     switchAction(){
-      this.actionPriorValidation = "Register"
+     
+      if( this.action === 0) { 
+     this.actionPriorValidation = "Register"
+      this.actionNoAccount = "back to login ?  "
       this.action = 1
+      }else{
+        this.actionPriorValidation = "Login"
+      this.actionNoAccount = "No Account ? Sign Up"
+      this.action = 0
+      }
     },
-    checkUserRequest() {
+   async checkUserRequest() {
       const firebaseConfig = {
         apiKey: "AIzaSyDguNf-sooubRJbfMJPsKSE6LTa7mQwMwM",
         authDomain: "umoja-assist.firebaseapp.com",
@@ -143,11 +168,10 @@ export default {
         measurementId: "G-9QKKGDBNS9",
       };
 
-       initializeApp(firebaseConfig);
-      // initializeApp(Secrets.firebaseConfig);
+       initializeApp(firebaseConfig); 
       console.log(" current actiom" , this.actionPriorValidation,  "action ",this.action)
       const auth = getAuth(); 
-      console.log(typeof(this.actionProirValidation)) 
+      console.log(this.action , "< ---- action") 
       if (this.action === 0) {
         this.validateUser(auth);
       }
