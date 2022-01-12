@@ -9,9 +9,10 @@
       duration-1000
       overflow-hidden
     "
-  >
-  
-    <div class="pt-10 mt-5 pb-3 flex flex-col items-center w-auto h-auto ">
+  > 
+  <div class="right-0"><TopNavigationBar/></div>
+    <div class="py-10 flex flex-col items-center w-auto h-auto pt-28">
+
       <div class="">
         <img
           src="src/assets/images/Umoja.svg"
@@ -310,7 +311,11 @@
 </template>
 
 <script>
+import TopNavigationBar from "./TopNavigationBar.vue";
 export default {
+  components:{
+TopNavigationBar
+  },
   data() {
     return {
       numOfPeopleInneed: 20,
