@@ -15,50 +15,176 @@
         layer-type="base"
         name="OpenStreetMap"
       ></l-tile-layer>
-    </l-map>
 
-    <div class="flex flex-col mx-10 p-10 bg-darkBlue  ">
-      <div
-        class="
-          z-400
-          bg-primaryYellow
-          p-5
-          my-16
-          w-44
-          rounded-xl
-          top-0
-          w-screen
-          absolute
-          capitalize
-        "
-      >
-      Number of People Who need help today
-      <div>{{ numberOfPeopleInNeed }}</div>
+      <!-- <div class=" flex flex-col gap-4 bg-primaryYellow  inherit  "> -->
+      <div class="flex flex-col overflow-hidden py-12">
+        <div
+          class="
+            z-400
+            divide-y divide-primaryYellow
+            border-2 border-white
+            px-4
+            flex flex-col
+            bg-white
+            mx-10
+            w-72
+            h-36
+            p-2
+            mb-5
+            rounded-xl
+            hover:transition
+            hover:duration-300
+            hover:-translate-y-2
+            hover:ease-in-out
+            hover:rounded-2xl
+            hover:border-primaryYellow
+            hover:border-2
+            shadow-xl
+            capitalize
+            text-center
+          "
+        >
+          <span class="text-base py-1 font-medium px-2">
+            People Who need help
+          </span>
+          <div></div>
+          <div class="text-5xl font-bold text-center text-maroon p-5">
+            {{ numberOfPeopleInNeed }}
+          </div>
+        </div>
+        <div
+          class="
+            z-400
+            bg-white
+            divide-y divide-primaryYellow
+            flex flex-col
+            border-2 border-white
+            shadow-xl
+            px-4
+            mx-10
+            w-72
+            h-36
+            p-2
+            mb-5
+            rounded-xl
+            shadow-2xl
+            hover:transition
+            hover:duration-300
+            hover:-translate-y-2
+            hover:ease-in-out
+            hover:rounded-2xl
+            hover:border-primaryYellow
+            hover:border-2
+            capitalize
+            text-center
+          "
+        >
+          <span class="text-lg font-medium px-2"> Number of Responses</span>
+          <div></div>
+          <div class="text-5xl font-bold text-center text-green p-5">
+            {{ responses }}
+          </div>
+        </div>
+        <div
+          class="
+            z-400
+            divide-y divide-primaryYellow
+            flex flex-col
+            border-2 border-white
+            px-4
+            p-2
+            bg-white
+            mx-10
+            mb-5
+            w-72
+            h-36
+            p-2
+            mb-5
+            rounded-xl
+            hover:transition
+            hover:duration-300
+            hover:-translate-y-2
+            hover:ease-in-out
+            hover:rounded-2xl
+            hover:border-primaryYellow
+            hover:border-2
+            shadow-xl
+            capitalize
+            text-center
+          "
+        >
+          <span class="text-lg font-medium px-2">Layer 33</span>
+          <div></div>
+          Layer 33
+        </div>
+        <div
+          class="
+            z-400
+            flex flex-col
+            border-2 border-primaryYellow
+            py-3
+            bg-white
+            mx-10
+            mb-5
+            shadow-xl
+            w-fit
+            h-auto
+            rounded-xl
+            hover:border-primaryYellow hover:border-2
+            capitalize
+          "
+        >
+          <div class="text-xs text-darkBlue font-bold px-6 py-2">
+            Are you on the <span class="text-primaryYellow">move</span> to
+            <span class="text-primaryYellow">help</span> out a brother/ sister ?
+            <button
+              class="
+                py-3
+                px-7
+                mx-3
+                hover:transition
+                hover:duration-300
+                hover:-translate-y-1
+                hover:ease-in-out
+                hover:shadow-2xl
+                rounded-full
+                bg-green
+                text-white
+                font-bold
+              "
+            >
+              Yes
+            </button>
+            <button
+              class="
+                py-3
+                px-8
+                mx-3
+                font-bold
+                hover:transition
+                hover:duration-300
+                hover:-translate-y-1
+                hover:ease-in-out
+                hover:shadow-2xl
+                rounded-full
+                bg-maroon
+                text-white
+              "
+            >
+              No
+            </button>
+          </div>
+          <div class="bg-lightGray  h-3 text-transparent">.</div>
+          <div class="text-xs text-darkBlue font-bold px-4  flex items-center">
+            <span class="text-primaryYellow">Select </span> the reinforcement
+            needed at the emergency site
+            <button class="mx-6  pb-3 hover:transition hover:ease-in-out hover:animate-pulse hover:translate-x-2 hover:duration-300"><img src="src/assets/images/policecar.svg" alt="police button" srcset="" /></button>
+            <button  class="mx-3  pb-3 hover:transition hover:ease-in-out hover:animate-pulse hover:translate-y-2 hover:duration-300"><img src="src/assets/images/firefighter.svg" alt="firefighter button" srcset="" /></button>
+            <button class="mx-6 mb-2 pb-3  hover:transition hover:ease-in-out hover:animate-pulse hover:translate-x-2 hover:duration-300 "><img src="src/assets/images/ambulance.svg" alt=" ambulance button" srcset="" /></button>
+          </div>
+        </div>
       </div>
-      <div
-        class="
-          z-400
-          bg-darkBlue
-          p-5
-          my-20
-          w-44
-          rounded-xl
-          top-0
-          w-screen
-          absolute
-        "
-      >
-        Layer 2
-      </div>
-      <div class="z-400 bg-white p-6 w-44 my-24 rounded-xl top-0 w-screen absolute">
-        Layer 2
-      </div>
-      <div
-        class="z-400 bg-darkBlue p-5 w-44 my-28 rounded-xl top-0 w-screen absolute"
-      >
-        Layer 2
-      </div>
-    </div>
+    </l-map>
   </div>
 </template>
 
@@ -95,7 +221,8 @@ export default {
         iconAnchor: [16, 37],
       }),
       markerObjects: null,
-      numberOfPeopleInNeed:100,
+      numberOfPeopleInNeed: 100,
+      responses: 80,
     };
   },
   async beforeMount() {
