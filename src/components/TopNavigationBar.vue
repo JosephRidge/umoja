@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row float-right mx-10 mt-5 rounded ">
+  <div class="flex flex-row float-right mx-10 mt-5  ">
     <router-link
       to="/home"
       class="
@@ -57,7 +57,7 @@
       Why Umoja</router-link
     >
     <router-link
-      to="/"
+      to="/auth"
       class="
         text-darkBlue
         mr-6

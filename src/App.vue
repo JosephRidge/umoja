@@ -6,7 +6,7 @@ import HomePage  from './components/HomePage.vue';
 </script>
 
 <template>
-  <HomePage />
+<router-view/>
 </template>
 
 <style>

@@ -99,7 +99,8 @@ export default {
       userPassword: "",
       actionPriorValidation: "Login",
       actionNoAccount:"No Account ? Sign Up",
-      action: 0
+      action: 0,
+      feedBackAfterAut: false
     };
   },
   mounted() {},
@@ -111,6 +112,7 @@ export default {
       .then((userCredential) =>{
         const user = userCredential.user
         console.log("credential = >  ", user.uid)
+        router.push('/home')
       })
       .catch((error)=>{
            const errorCode = error.code;
@@ -121,6 +123,7 @@ export default {
             "error message --- > ",
             errorCode
           );
+          router.push('/auth')
         });
 
     },
@@ -133,6 +136,7 @@ export default {
         .then((userCredential) => {
           const user = userCredential.user;
         console.log("credential = >  ", user.uid)
+           router.push('/home')
         })
         .catch((error) => {
           const errorCode = error.code;
