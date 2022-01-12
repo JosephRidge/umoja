@@ -10,7 +10,8 @@
       overflow-hidden
     "
   >
-    <div class="py-10 flex flex-col items-center w-auto h-auto ">
+  
+    <div class="pt-10 mt-5 pb-3 flex flex-col items-center w-auto h-auto ">
       <div class="">
         <img
           src="src/assets/images/Umoja.svg"
