@@ -4,6 +4,7 @@ import HomePage from '../components/HomePage.vue'
 import LoginPage from '../components/LoginPage.vue'
 import AboutUs from '../components/AboutUs.vue'
 import Dashboard from '../components/Dashboard.vue'
+
 const routes = [
     { path: '/', component: HomePage },  
     { path: '/auth', component: LoginPage },
