@@ -4,11 +4,19 @@
       bg-[url('src/assets/images/background-login.svg')] bg-cover
       h-screen
       w-screen
-      flex
+      flex flex-col
       items-center
     "
   >
-   <div class="pt-12 pb-8 flex flex-col items-center w-auto h-auto ">
+   <div class="  
+        rounded-2xl
+        w-96 
+        py-2
+        px-4 
+        flex flex-col
+        mt-32
+        items-center
+      mx-auto">
 
       <div class="">
         <img
