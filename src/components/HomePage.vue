@@ -9,6 +9,7 @@
       duration-1000
     "
   >
+  <div class="right-0"><TopNavigationBar/></div>
     <div class="py-10 flex flex-col items-center w-auto h-auto pt-28">
       <div class="">
         <img
@@ -283,7 +284,11 @@
 </template>
 
 <script>
+import TopNavigationBar from "./TopNavigationBar.vue";
 export default {
+  components:{
+TopNavigationBar
+  },
   data() {
     return {
       numOfPeopleInneed: 20,
