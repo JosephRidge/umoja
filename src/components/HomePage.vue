@@ -7,10 +7,12 @@
       transition
       ease-in-out
       duration-1000
+      overflow-hidden
     "
-  >
+  > 
   <div class="right-0"><TopNavigationBar/></div>
     <div class="py-10 flex flex-col items-center w-auto h-auto pt-28">
+
       <div class="">
         <img
           src="src/assets/images/Umoja.svg"
@@ -36,7 +38,7 @@
           pr-9
           rounded-br-full rounded-tr-full
           mb-24
-          mr-10
+          mr-24
           shadow-md
           hover:transition
           hover:duration-700
@@ -63,9 +65,10 @@
             px-4
             py-3
             h-auto
+
           "
         >
-          Getting Started
+         Your Journey 
         </div>
         <div class="flex flex-row px-4 py-2 text-xs">
           <div
@@ -258,14 +261,38 @@
           {{ numOfPeopleHelping }}
         </div>
       </div>
+       <div
+        class="
+          text-medium
+          rounded-2xl
+          border border-lightGray border-2 border-lightGray
+          hover:border-darkBlue hover:bg-lightGray hover:ease-in-out
+          text-primaryYellow
+          hover:text-darkBlue hover:transition hover:duration-300
+          text-darkBlue
+          capitalize
+          flex-col
+          mx-10
+          py-7
+          px-10
+          shadow-xl
+          items-center
+        "
+      >
+        <span class="text-darkBlue"> Number of Emergency Personel Deployed </span>
+
+        <div class="text-center font-bold text-5xl w mx-4 mt-4">
+          {{ numOfEmergencyPersonel }}
+        </div>
+      </div>
     </div>
     <div class="
           bg-primaryYellow
           pl-3
           pt-3
-          mt-6
+          mt-2
           w-28
-          
+          h-20
           rounded-full
           transition
           duration-1000 
@@ -293,6 +320,7 @@ TopNavigationBar
     return {
       numOfPeopleInneed: 20,
       numOfPeopleHelping: 279,
+      numOfEmergencyPersonel:400 
     };
   },
   mounted() {},
