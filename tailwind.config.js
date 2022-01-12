@@ -12,6 +12,9 @@ module.exports = {
       'textgray':'#A0988f',
       'darkBlue':'#041759',
       'lightGray':'#DCDCDC'
+    },
+    zIndex: {
+      '400': '400',
     }
   },
   plugins: [],

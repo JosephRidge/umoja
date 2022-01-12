@@ -83,3 +83,20 @@ const routes = [
   app.use(router)
   
   ```
+
+# Adding LeafltJS
+The implementation maybe updated overtime hence the commands used here ay not work at the time of your follow through hence kinldy check out the [Docs for vue-leaflet](https://github.com/vue-leaflet/vue-leaflet).
+
+On terminal run :  
+`npm i -D @vue-leaflet/vue-leaflet`
+Add the follwing :
+- On the index.html : 
+```<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>```
+
+- Place this after the leaflet css
+``` <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>```  
