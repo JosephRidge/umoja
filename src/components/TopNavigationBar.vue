@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row float-right mx-10 mt-10 rounded ">
+  <div class="flex flex-row float-right mx-10 mt-5 rounded ">
     <router-link
       to="/home"
       class="
@@ -19,7 +19,7 @@
       >Home
     </router-link>
     <router-link
-      to="/"
+      to="/dashboard"
       class="
         text-darkBlue
         mr-6
@@ -38,7 +38,7 @@
       Dashboard</router-link
     >
     <router-link
-      to="/"
+      to="/aboutUs"
       class="
         text-darkBlue
         mr-6
