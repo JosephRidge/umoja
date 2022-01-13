@@ -16,7 +16,7 @@
         name="OpenStreetMap"
       ></l-tile-layer>
 
-  <TopNavigationBar class="z-400 absolute right-0 bg-white px-4 py-3 h-12 m-0 rounded-xl shadow-2xl drop-shadow-2xl  hover:text-primaryYellow"/> 
+  <TopNavigationBar class="z-400 absolute right-0 bg-white px-4 py-3 h-12 m-0 text-sm rounded-xl shadow-2xl drop-shadow-2xl  hover:text-primaryYellow"/> 
       <div class="flex flex-col overflow-hidden py-12">
 
  
