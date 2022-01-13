@@ -16,8 +16,10 @@
         name="OpenStreetMap"
       ></l-tile-layer>
 
-      <!-- <div class=" flex flex-col gap-4 bg-primaryYellow  inherit  "> -->
+  <TopNavigationBar class="z-400 absolute right-0 bg-white px-4 py-3 h-12 m-0 rounded-xl shadow-2xl drop-shadow-2xl  hover:text-primaryYellow"/> 
       <div class="flex flex-col overflow-hidden py-12">
+
+ 
         <div
           class="
             z-400
@@ -52,6 +54,7 @@
             {{ numberOfPeopleInNeed }}
           </div>
         </div>
+        
         <div
           class="
             z-400
@@ -191,11 +194,13 @@
 <script>
 import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer } from "@vue-leaflet/vue-leaflet";
+import TopNavigationBar from "./TopNavigationBar.vue";
 
 export default {
   components: {
     LMap,
     LTileLayer,
+    TopNavigationBar
   },
   data() {
     return {
