@@ -11,7 +11,13 @@ module.exports = {
       'darkgray':"#373449",
       'textgray':'#A0988f',
       'darkBlue':'#041759',
-      'lightGray':'#DCDCDC'
+      'lightGray':'#DCDCDC',
+      'maroon':'#A90000',
+      'red':'#ED4343',
+      'green':'#45B600'
+    },
+    zIndex: {
+      '400': '400',
     }
   },
   plugins: [],
