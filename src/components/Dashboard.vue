@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <l-map
       style="height: 100vh; width: 100vw; overflow: hidden"
       class="relative"
@@ -192,6 +193,7 @@
 </template>
 
 <script>
+
 import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer } from "@vue-leaflet/vue-leaflet";
 import TopNavigationBar from "./TopNavigationBar.vue";
