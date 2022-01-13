@@ -63,7 +63,7 @@
             flex flex-col
             border-2 border-white
             shadow-xl
-            px-4
+            px-6
             mx-10
             w-72
             h-36
@@ -82,7 +82,7 @@
             text-center
           "
         >
-          <span class="text-lg font-medium px-2"> Number of Responses</span>
+          <span class="text-base font-bold px-2"> Number of Responses</span>
           <div></div>
           <div class="text-5xl font-bold text-center text-green p-5">
             {{ responses }}
@@ -90,8 +90,7 @@
         </div>
         <div
           class="
-            z-400
-            divide-y divide-primaryYellow
+            z-400 
             flex flex-col
             border-2 border-white
             px-4
@@ -100,13 +99,12 @@
             mx-10
             mb-5
             w-72
-            h-36
+            h-44
             p-2
             mb-5
             rounded-xl
             hover:transition
-            hover:duration-300
-            hover:-translate-y-2
+            hover:duration-300 
             hover:ease-in-out
             hover:rounded-2xl
             hover:border-primaryYellow
@@ -114,11 +112,13 @@
             shadow-xl
             capitalize
             text-center
+            items-center 
           "
         >
-          <span class="text-lg font-medium px-2">Layer 33</span>
+          <span class="  font-bold px-2 text-darkBlue ">In Danger ? Tap the  button to call for help </span>
           <div></div>
-          Layer 33
+          <button  class="rounded-full bg-primaryYellow text-white w-48 font-bold p-3 border-2 m-2 shadow-xl hover:transition hover:duration-300 hover:-translate-y-1"> Medium Danger</button> 
+          <button class="rounded-full bg-red  text-white font-bold w-48 p-3 border-2  m-2 shadow-xl hover:transition hover:duration-300 hover:-translate-y-1 ">I need Help Now ! </button> 
         </div>
         <div
           class="
@@ -142,9 +142,9 @@
             <span class="text-primaryYellow">help</span> out a brother/ sister ?
             <button
               class="
-                py-3
+                py-3 
                 px-7
-                mx-3
+                ml-20
                 hover:transition
                 hover:duration-300
                 hover:-translate-y-1
@@ -160,7 +160,7 @@
             </button>
             <button
               class="
-                py-3
+                py-3 
                 px-8
                 mx-3
                 font-bold
@@ -170,7 +170,7 @@
                 hover:ease-in-out
                 hover:shadow-2xl
                 rounded-full
-                bg-maroon
+                bg-red
                 text-white
               "
             >

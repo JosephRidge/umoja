@@ -13,6 +13,7 @@ module.exports = {
       'darkBlue':'#041759',
       'lightGray':'#DCDCDC',
       'maroon':'#A90000',
+      'red':'#ED4343',
       'green':'#45B600'
     },
     zIndex: {
