@@ -127,8 +127,10 @@ export default {
       userEmail: "",
       userPassword: "",
       actionPriorValidation: "Login",
-      actionNoAccount: "No Account ? Sign Up",
+      actionNoAccount:"No Account ? Sign Up",
       action: 0,
+      feedBackAfterAut: false
+
     };
   },
   mounted() {},
@@ -137,12 +139,16 @@ export default {
       let email = this.userEmail;
       let password = this.userPassword;
       signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          console.log("credential = >  ", user.uid);
-        })
-        .catch((error) => {
-          const errorCode = error.code;
+      .then((userCredential) =>{
+        const user = userCredential.user
+        console.log("credential = >  ", user.uid)
+        router.push('/home')
+      })
+      .catch((error)=>{
+           const errorCode = error.code;
+
+
+        
           const errorMessage = error.message;
           console.log(
             "errorr === > ",
@@ -150,6 +156,7 @@ export default {
             "error message --- > ",
             errorCode
           );
+          router.push('/auth')
         });
     },
     registerNewUser(auth) {
@@ -160,7 +167,8 @@ export default {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log("credential = >  ", user.uid);
+        console.log("credential = >  ", user.uid)
+           router.push('/home')
         })
         .catch((error) => {
           const errorCode = error.code;
