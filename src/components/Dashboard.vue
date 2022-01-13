@@ -220,8 +220,18 @@ export default {
         [-4.8995204, 33.9098987],
         [4.62, 41.899578],
       ],
-      icon: L.icon({
-        iconUrl: "src/assets/device.png",
+      meIcon: L.icon({
+        iconUrl: "src/assets/images/me.png",
+        iconSize: [32, 37],
+        iconAnchor: [16, 37],
+      }),
+      inaidIcon: L.icon({
+        iconUrl: "src/assets/images/inaid.png",
+        iconSize: [32, 37],
+        iconAnchor: [16, 37],
+      }),
+      helperIcon: L.icon({
+        iconUrl: "src/assets/images/helper.png",
         iconSize: [32, 37],
         iconAnchor: [16, 37],
       }),
