@@ -176,7 +176,7 @@
             "
             v-on="click"
           >
-            Probable Danger
+           Is Someone in Danger ?
           </button>
           <button
             class="
@@ -207,7 +207,7 @@
             mx-10
             mb-5
             shadow-xl
-            w-fit
+            w-72
             h-auto
             rounded-xl
             hover:border-primaryYellow hover:border-2
@@ -300,12 +300,20 @@
               No
             </button> -->
             
+          
           </div>
           <!-- Contains  icon images of the police car, ambulance and fire hydren-->
           <div class="bg-lightGray h-3 text-transparent"> </div>
-          <div class="text-xs text-darkBlue font-bold px-4 flex items-center">
+       
+       <details class="my-4 content-center px-3" >
+         <summary  class="mx-4 text-xs text-darkBlue font-bold "> <span class="text-primaryYellow mr-2">
+           Select</span>  Emergency Group to alert</summary> 
+         <!-- <div class="text-xs text-darkBlue font-bold px-4 pt-2 flex items-center">
             <span class="text-primaryYellow mr-2">Select </span> the reinforcement
             needed at the emergency site
+         </div> -->
+       
+          <div class="py-2 grid grid-cols-2 text-center ">      
             <button
               class="
                 mx-6
@@ -315,25 +323,30 @@
                 hover:animate-pulse
                 hover:translate-x-2
                 hover:duration-300
+                flex flex-col   
               "
-            >
-              <img
+            > 
+            <div class="font-bold text-right my-2 " >Police</div>
+            <div><img
                 src="src/assets/images/policecar.svg"
                 alt="police button"
-                srcset=""
-              />
-            </button>
+                srcset=""/></div>              
+            </button> 
+             
             <button
               class="
                 mx-3
-                pb-3
+                pb-3 
+
                 hover:transition
                 hover:ease-in-out
                 hover:animate-pulse
-                hover:translate-y-2
+                hover:translate-x-2
                 hover:duration-300
               "
             >
+
+            <div class="font-bold my-2 text-left" >Fire Fighters</div>
               <img
                 src="src/assets/images/firefighter.svg"
                 alt="firefighter button"
@@ -343,8 +356,7 @@
             <button
               class="
                 mx-6
-                mb-2
-                pb-3
+                mb-2 
                 hover:transition
                 hover:ease-in-out
                 hover:animate-pulse
@@ -352,13 +364,37 @@
                 hover:duration-300
               "
             >
+
+            <div class="font-bold text-left w-28 my-2">Ambulance</div>
               <img
                 src="src/assets/images/ambulance.svg"
                 alt=" ambulance button"
                 srcset=""
               />
-            </button>
-          </div>
+            </button> 
+              <button
+              class="
+                mx-3 
+                my-2
+                w-14 
+                hover:transition
+                hover:ease-in-out
+                hover:animate-pulse
+                hover:-translate-x-1
+                hover:duration-300
+              "
+            >
+            <div class="font-bold w-28 text-left my-2  " >Break Down </div>
+            <img
+                src="src/assets/images/breakdown.svg"
+                alt="Tow Truck"
+              class=" "
+                srcset=""
+              /> 
+            </button> 
+            </div>
+       </details>
+                      
         </div>
 
         </div>
