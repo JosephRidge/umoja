@@ -4,7 +4,7 @@
       style="height: 100vh; width: 100vw; overflow: hidden"
       class="relative"
       :zoom="zoom"
-      :minZoom="6.5"
+      :minZoom="5.5"
       :center="centerboundsOfKenya"
       :maxBounds="bounds"
       :options="{ zoomControl: true }"
@@ -15,7 +15,11 @@
         layer-type="base"
         name="OpenStreetMap"
       ></l-tile-layer>
-
+   
+      <l-marker v-for="location in locations" :key="location"
+      :lat-lng="location">
+      <l-popup>{{location}}</l-popup>
+      </l-marker>  
       <TopNavigationBar
         class="
           z-400
@@ -33,127 +37,146 @@
           hover:text-primaryYellow
         "
       />
-      <div class="flex flex-col overflow-hidden py-12">
-        <div
+     
+      <div class="flex flex-col justify-items-stretch overflow-hidden py-12">
+       <div class="flex justify-between flex-col">
+ 
+ <details class="
+              z-400
+              bg-white
+              divide-y  
+              w-72              
+              transition ease-in-out duration-700
+              mb-5
+              mx-10
+            rounded-xl
+            hover:transition
+            hover:duration-700
+            hover:ease-in-out
+            hover:border-primaryYellow
+            hover:rounded-2xl">
+        <summary class="px-4 py-2 font-bold transition ease-in-out duration-700 text-xs text-darkBlue">Number of People Needing Help</summary>
+      <div
           class="
             z-400
             divide-y divide-primaryYellow
             border-2 border-white
             px-4
             flex flex-col
-            bg-white
-            mx-10
+            bg-white 
             w-72
-            h-36
+            h-28
             p-2
             mb-5
             rounded-xl
             hover:transition
-            hover:duration-300
-            hover:-translate-y-2
-            hover:ease-in-out
-            hover:rounded-2xl
-            hover:border-primaryYellow
-            hover:border-2
-            shadow-xl
+            hover:duration-300 
+            hover:ease-in-out  
             capitalize
             text-center
-            hidden
+             
           "
         >
           <!-- TODO: remove hiddedb attrib -->
-          <span class="text-base py-1 font-medium px-2">
-            People Who need help
+          <span class="text-base text-base font-bold px-2">
+           Current Number
           </span>
           <div></div>
           <div class="text-5xl font-bold text-center text-maroon p-5">
             {{ numberOfPeopleInNeed }}
           </div>
         </div>
-
+      </details>
+    <details class="
+              z-400
+              bg-white
+              divide-y  
+              w-72
+              
+              transition ease-in-out duration-700
+              mb-5
+              mx-10
+            rounded-xl
+            hover:transition
+            hover:duration-700
+            hover:ease-in-out
+            hover:border-primaryYellow
+            hover:rounded-2xl">
+      <summary class="px-4 py-2 font-bold transition ease-in-out duration-700 text-darkBlue text-xs "> Number of Responses</summary>
         <div
           class="
             z-400
             bg-white
             divide-y divide-primaryYellow
             flex flex-col
-            border-2 border-white
-            shadow-xl
-            px-6
-            mx-10
-            w-72
-            h-36
+            border-2 border-white 
+            px-6 
             p-2
-            mb-5
-            rounded-xl
-            shadow-2xl
-            hover:transition
-            hover:duration-300
-            hover:-translate-y-2
-            hover:ease-in-out
-            hover:rounded-2xl
-            hover:border-primaryYellow
+            mb-5 
+            h-28
             hover:border-2
+            rounded-xl
             capitalize
-            text-center
-            hidden
+            text-center     
           "
         >
-          <!-- TODO: remove hiddedb attrib -->
+          <!-- TODO: remove hiddedb attribute -->
           <span class="text-base font-bold px-2"> Number of Responses</span>
           <div></div>
           <div class="text-5xl font-bold text-center text-green p-5">
-            {{ responses }}
-          </div>
-        </div>
-        <div
-          class="
+          {{ responses }}
+          </div> 
+             </div>
+             </details>
+             
+             <details class="
             z-400
-            flex flex-col
-            border-2 border-white
-            px-4
-            p-2
-            bg-white
             mx-10
             mb-5
             w-72
-            h-44
+            p-2
+            bg-white
             p-2
             mb-5
-            rounded-xl
+            rounded-xl">
+               <summary class="font-bold px-2 text-darkBlue"> Are you In Danger ?</summary>
+               <div
+          class="
+            flex flex-col
+            border-2 border-white
+            pt-3
+            px-4
+            h-36
             hover:transition
-            hover:duration-300
-            hover:ease-in-out
-            hover:rounded-2xl
-            hover:border-primaryYellow
-            hover:border-2
-            shadow-xl
+            hover:duration-300  
             capitalize
             text-center
             items-center
-            hidden
+             
           "
         >
           <!-- TODO: remove hiddedb attrib -->
-          <span class="font-bold px-2 text-darkBlue"
+          <!-- <span class="font-bold px-2 text-darkBlue"
             >In Danger ? Tap the button to call for help
-          </span>
+          </span> -->
           <div></div>
           <button
             class="
               rounded-full
               bg-primaryYellow
               text-white
-              w-48
+              w-44
               font-bold
-              p-3
+              p-2
               border-2
               m-2
               shadow-xl
+              translate-y-1
               hover:transition hover:duration-300 hover:-translate-y-1
             "
+            v-on="click"
           >
-            Medium Danger
+            Probable Danger
           </button>
           <button
             class="
@@ -161,8 +184,8 @@
               bg-red
               text-white
               font-bold
-              w-48
-              p-3
+              w-44
+              p-2
               border-2
               m-2
               shadow-xl
@@ -172,6 +195,8 @@
             I need Help Now !
           </button>
         </div>
+             </details>
+                <!-- Public bodies Buttons -->
         <div
           class="
             z-400
@@ -195,7 +220,7 @@
             <span class="text-primaryYellow">help</span> out a brother/ sister
 
             <!-- TODO: Start of trial Data once done  -->
-            <div class="mx-2 my-3">
+            <!-- <div class="mx-2 my-3">
               Coordinates :
               <input
                 v-model="location_coordinate"
@@ -226,17 +251,17 @@
                 placeholder="Makadara law courts"
                 class="text-textgray rounded-2xl h-12 w-80 text-center"
               />
-            </div>
-            <div class="mx-2 my-3">
+            </div> -->
+            <!-- <div class="mx-2 my-3">
               Tell us More :
               <input
                 v-model="description"
                 placeholder="lorem lorem wololo"
                 class="text-textgray rounded-2xl h-12 w-80 text-center"
               />
-            </div>
+            </div> -->
             <!-- TODO: End of trial Data once done  -->
-
+<!-- 
             <button
               v-on:click="sendEmergencyReq()"
               class="
@@ -255,8 +280,8 @@
               "
             >
               Yes
-            </button>
-            <button
+            </button> -->
+            <!-- <button
               class="
                 py-3
                 px-8
@@ -273,11 +298,13 @@
               "
             >
               No
-            </button>
+            </button> -->
+            
           </div>
-          <div class="bg-lightGray h-3 text-transparent">.</div>
+          <!-- Contains  icon images of the police car, ambulance and fire hydren-->
+          <div class="bg-lightGray h-3 text-transparent"> </div>
           <div class="text-xs text-darkBlue font-bold px-4 flex items-center">
-            <span class="text-primaryYellow">Select </span> the reinforcement
+            <span class="text-primaryYellow mr-2">Select </span> the reinforcement
             needed at the emergency site
             <button
               class="
@@ -333,22 +360,27 @@
             </button>
           </div>
         </div>
+
+        </div>
       </div>
+      
     </l-map>
   </div>
 </template>
 
 <script>
 import "leaflet/dist/leaflet.css";
-import { LMap, LTileLayer } from "@vue-leaflet/vue-leaflet";
+import { LMap, LTileLayer, LMarker,LPopup } from "@vue-leaflet/vue-leaflet";
 import TopNavigationBar from "./TopNavigationBar.vue";
-import { getDatabase, ref, set,push } from "firebase/database";
+import { getDatabase, ref, set,push, onValue } from "firebase/database";
 import { initializeApp } from "firebase/app";
 export default {
   components: {
     LMap,
     LTileLayer,
     TopNavigationBar,
+    LMarker,
+    LPopup
   },
   data() {
     return {
@@ -358,6 +390,7 @@ export default {
       exact_location: "",
       user_name: "",
       degree: "",
+      locations:[],
       //TODO : End once done testing
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       attribution:
@@ -422,10 +455,11 @@ export default {
       let db = getDatabase(app)
       console.log("==>",db)
      push(ref(db,  "emergencies/"), {
-        user_name: 'userName',
-        location_coords: 'myLocCoordinates',
-        exact_location: 'exactLonbmbcationDesc',
-        emergency_description: 'emergecxncyDescription',
+        user_name: 'Jonna Jina',
+        location_lat: 1.3053 , 
+        location_lng:36.8247,
+        exact_location: 'Nyayo stadium kwa Bridge next to Shell petrol station',
+        emergency_description: 'Thugs have just been spotted on the Nyayo staidum com[plex',
         button_clicks: 5,
       })
         .then(() => {
@@ -449,6 +483,33 @@ export default {
       console.log(app)
       return app;
     },
+    getAllData(){
+      const firebaseConfig = {
+        apiKey: "AIzaSyDguNf-sooubRJbfMJPsKSE6LTa7mQwMwM",
+        authDomain: "umoja-assist.firebaseapp.com",
+        projectId: "umoja-assist",
+        storageBucket: "umoja-assist.appspot.com",
+        messagingSenderId: "716904160676",
+        appId: "1:716904160676:web:bba0bb7cf2919c3d3e3531",
+        measurementId: "G-9QKKGDBNS9",
+      };
+      let app = initializeApp(firebaseConfig);
+      let db = getDatabase(app)
+      let data
+      let emergencyRef = ref(db,'emergencies/')
+      // console.log(emergencyRef);
+      onValue(emergencyRef, (snapshot)=>{
+        data = snapshot.val();
+        console.log(" - - > ",typeof(data), "-- >", Object.values(data));
+        for(let i = 0; i<Object.values(data).length ; i++){
+            let loc = [Object.values(data)[i].location_lat,Object.values(data)[i].location_lng ]
+            this.locations.push(loc)
+          }
+     })
+
+      
+
+    }
   },
   async beforeMount() {
     // HERE is where to load Leaflet components!
@@ -458,6 +519,9 @@ export default {
     //   circleMarker(latLng, { radius: 8 });
     this.mapIsReady = true;
   },
+  mounted(){
+    this.getAllData();
+      }
 };
 </script>
 
