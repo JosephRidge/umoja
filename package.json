@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
+    "devH": "vite --host",
     "build": "vite build",
     "preview": "vite preview"
   },

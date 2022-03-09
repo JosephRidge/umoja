@@ -48,10 +48,7 @@
           hover:shadow-xl
         "
       >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates
-        quisquam velit placeat, quo repellendus assumenda excepturi distinctio
-        ab error blanditiis minus libero nesciunt eius culpa veritatis obcaecati
-        inventore quae consectetur.
+       {{ aboutUmoja }}
       </div>
       <div
         id="rightServiceSection"
@@ -311,6 +308,7 @@
 
 <script>
 import TopNavigationBar from "./TopNavigationBar.vue";
+import defaultMixins  from "../mixins/defaultMixins";
 export default {
   components:{
 TopNavigationBar
@@ -324,6 +322,7 @@ TopNavigationBar
   },
   mounted() {},
   methods: {},
+  mixins:[defaultMixins]
 };
 </script>
 

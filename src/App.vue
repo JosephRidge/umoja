@@ -1,4 +1,5 @@
  <script setup> 
+ import HomePageVue from './components/HomePage.vue';
 </script>
 
 <template>
