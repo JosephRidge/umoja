@@ -17,9 +17,14 @@
       ></l-tile-layer>
    
       <l-marker v-for="location in locations" :key="location"
-      :lat-lng="location">
-      <l-popup>{{location}}</l-popup>
+      :lat-lng="location" >
+      <l-icon  icon-url="src/assets/images/inaid.png" class="shadow-xl"></l-icon>
+      <l-popup> hey there ineed help ! </l-popup>
       </l-marker>  
+    <l-marker   :lat-lng="[-1.3071, 36.8155]" >
+      <l-icon  icon-url="src/assets/images/me.png" class="shadow-xl"></l-icon>
+      <l-popup> This is Me</l-popup>
+         </l-marker>
       <TopNavigationBar
         class="
           z-400
@@ -406,7 +411,7 @@
 
 <script>
 import "leaflet/dist/leaflet.css";
-import { LMap, LTileLayer, LMarker,LPopup } from "@vue-leaflet/vue-leaflet";
+import { LMap, LTileLayer, LMarker,LPopup,LIcon } from "@vue-leaflet/vue-leaflet";
 import TopNavigationBar from "./TopNavigationBar.vue";
 import { getDatabase, ref, set,push, onValue } from "firebase/database";
 import { initializeApp } from "firebase/app";
@@ -416,7 +421,8 @@ export default {
     LTileLayer,
     TopNavigationBar,
     LMarker,
-    LPopup
+    LPopup,
+    LIcon
   },
   data() {
     return {
