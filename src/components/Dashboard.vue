@@ -358,7 +358,7 @@
         </div>
       </div>
       <!-- TODO: test modal  -->
-      <HelpFormVue v-if="showForm === false" 
+      <HelpFormVue  @closeDialog="closeDialogForm" v-if="showForm === true"
        class="bg-darkBlue bg-opacity-50 absolute inset-0 flex"/>
       
     </l-map>
@@ -434,13 +434,16 @@ export default {
       emergencyType:"",
       emergencyDescrp:"",
       targetLocationCoords:[],
-      showForm:false   };
+      showForm:false  
+       };
   },
   methods: {
-    callAuthorities(authority){
-      // targetLocation:"",
-      // emergencyType:"",
-      // targetLocationCoords:[]
+    closeDialogForm(event){
+      console.log(" === > ",  event)
+       this.showForm =  !event
+      console.log(" === > dgf ",this.showForm)
+    },
+    callAuthorities(authority){ 
       console.log(" authoritu ", authority)
       const firebaseConfig = {
         apiKey: "AIzaSyDguNf-sooubRJbfMJPsKSE6LTa7mQwMwM",
@@ -583,6 +586,7 @@ export default {
     },
     ambulanceAlert(){
     this.ambulance = !this.ambulance
+    
     if(this.ambulance === true){
       this.callAuthorities("Ambulance")
     }else{
@@ -613,6 +617,7 @@ export default {
      if(this.breakDown == true){
       this.callAuthorities("Break Down Vehicle")
       this.breakDown = !this.breakDown
+    this.showForm = !this.showForm 
     }else{
       console.log("None requested")
     }
