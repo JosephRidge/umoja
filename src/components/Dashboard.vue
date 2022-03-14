@@ -15,11 +15,15 @@
         layer-type="base"
         name="OpenStreetMap"
       ></l-tile-layer>
-   
+    
       <l-marker v-for="location in locations" :key="location"
-      :lat-lng="location" >
+      :lat-lng="location.loc" >
       <l-icon  icon-url="src/assets/images/inaid.png" class="shadow-xl"></l-icon>
-      <l-popup> hey there ineed help ! </l-popup>
+      <l-popup class="my-5"> 
+        <div class="font-semibold text-darkBlue  "> Hi, my name is <span class="text-dark-orange"> {{location.username}} </span></div>
+        <div class="font-semibold text-darkBlue my-1  "> My Location :  <span class="font-bold text-dark-orange"> {{location.locationdesc}}</span></div>
+       <div class="font-bold rounded-xl shadow-xl bg-orange py-1 px-3 capitalize text-xs text-center">  <span class="text-white"> {{location.emergencydesc}} ! </span></div>
+        </l-popup>
       </l-marker>  
     <l-marker   :lat-lng="[-1.3071, 36.8155]" >
       <l-icon  icon-url="src/assets/images/me.png" class="shadow-xl"></l-icon>
@@ -545,7 +549,18 @@ export default {
         console.log(" - - > ",typeof(data), "-- >", Object.values(data));
         for(let i = 0; i<Object.values(data).length ; i++){
             let loc = [Object.values(data)[i].location_lat,Object.values(data)[i].location_lng ]
-            this.locations.push(loc)
+            let emergencydescription = Object.values(data)[i].emergency_description
+            let username = Object.values(data)[i].user_name 
+            let locationdesc = Object.values(data)[i].exact_location
+            let details = {
+              'username':username,
+              'emergencydesc': emergencydescription,
+              'locationdesc':locationdesc,
+              'loc':loc,
+            }
+            console.log("details > ", details)
+            // this.locations.push(loc)
+             this.locations.push(details)
           }
      })
 
