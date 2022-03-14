@@ -3,7 +3,7 @@
     <l-map
       style="height: 100vh; width: 100vw; overflow: hidden"
       class="relative"
-      :zoom="zoom"
+      :zoom="8"
       :minZoom="5.5"
       :center="centerboundsOfKenya"
       :maxBounds="bounds"
@@ -16,7 +16,8 @@
         name="OpenStreetMap"
       ></l-tile-layer>
     
-      <l-marker v-for="location in locations" :key="location"
+      <l-marker v-for="location in locations" 
+      :key="location"
       :lat-lng="location.loc" >
       <l-icon  icon-url="src/assets/images/inaid.png" class="shadow-xl"></l-icon>
       <l-popup class="my-5 w-auto"> 
@@ -30,7 +31,7 @@
        </div>
            <div> 
           <button
-          @click="getHelp(location.locationdesc, location.emergencydesc)"
+          @click="getHelp(location.locationdesc, location.emergencydesc, location.loc)"
            class=" text-darkBlue 
             rounded
             font-bold py-1 px-3 mx-2 
@@ -68,18 +69,18 @@
           hover:text-primaryYellow
         "
       />
-     
       <div class="flex flex-col justify-items-stretch overflow-hidden py-12">
        <div class="flex justify-between flex-col">
- 
- <details class="
-              z-400
-              bg-white
-              divide-y  
-              w-72              
-              transition ease-in-out duration-700
-              mb-5
-              mx-10
+   
+
+<details class=" 
+            z-400
+            bg-white
+            divide-y  
+            w-72              
+            transition ease-in-out duration-700
+            mb-5
+            mx-10
             rounded-xl
             hover:transition
             hover:duration-700
@@ -104,10 +105,9 @@
             hover:duration-300 
             hover:ease-in-out  
             capitalize
-            text-center
-             
+            text-center             
           "
-        >
+        > 
           <!-- TODO: remove hiddedb attrib -->
           <span class="text-base text-base font-bold px-2">
            Current Number
@@ -118,6 +118,7 @@
           </div>
         </div>
       </details>
+ 
     <details class="
               z-400
               bg-white
@@ -159,8 +160,7 @@
           </div> 
              </div>
              </details>
-             
-             <details class="
+           <details class="
             z-400
             mx-10
             mb-5
@@ -262,6 +262,7 @@
        
           <div class="py-2 grid grid-cols-2 text-center ">      
             <button
+            @click="policeAlert()"
               class="
                 mx-6
                 pb-3
@@ -281,6 +282,7 @@
             </button> 
              
             <button
+            @click="fireHydrenAlert()"
               class="
                 mx-3
                 pb-3 
@@ -301,6 +303,7 @@
               />
             </button>
             <button
+            @click="breakDownAlert()"
               class="
                 mx-6
                 mb-2 
@@ -320,6 +323,7 @@
               />
             </button> 
               <button
+              @click="breakDownAlert()"
               class="
                 mx-3 
                 my-2
@@ -343,7 +347,14 @@
        </details>
                       
         </div>
-
+  <!-- Toast message Start -->
+    <div v-if="helpResponded === true" 
+      :class=" 
+      'z-400 float-right w-80 mx-60 shadow items-center transition ease-in-out delay-300 bg-green border-l-4 rounded-2xl border-red-500 text-white p-4'  " role="alert">
+  <p class="font-bold">Success</p>
+  <p>Kindly Select the Emergency group to proceed.</p>
+</div>
+  <!-- Toast message End -->
         </div>
       </div>
       
@@ -357,6 +368,7 @@ import { LMap, LTileLayer, LMarker,LPopup,LIcon } from "@vue-leaflet/vue-leaflet
 import TopNavigationBar from "./TopNavigationBar.vue";
 import { getDatabase, ref, set,push, onValue } from "firebase/database";
 import { initializeApp } from "firebase/app";
+import HelpFormVue from "./HelpForm.vue";
 export default {
   components: {
     LMap,
@@ -364,7 +376,8 @@ export default {
     TopNavigationBar,
     LMarker,
     LPopup,
-    LIcon
+    LIcon,
+    HelpFormVue
   },
   data() {
     return {
@@ -379,8 +392,7 @@ export default {
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       attribution:
         '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-
-      markerLatLng: [51.504, -0.159],
+ 
       iconWidth: 45,
       iconHeight: 40,
       iconSize: 64,
@@ -410,12 +422,69 @@ export default {
       markerObjects: null,
       numberOfPeopleInNeed: 100,
       responses: 80,
-    };
+      helpResponded:false,
+      ambulance:false,
+      police:false,
+      breakDown:false,
+      fireHydren:false, 
+      targetLocation:"",
+      emergencyType:"",
+      emergencyDescrp:"",
+      targetLocationCoords:[],
+      showForm:false   };
   },
   methods: {
-    getHelp(target_location, emergency){
-      console.log("CCCCCcc")
-      console.log(" Challenge",target_location,emergency )
+    callAuthorities(authority){
+      // targetLocation:"",
+      // emergencyType:"",
+      // targetLocationCoords:[]
+      console.log(" authoritu ", authority)
+      const firebaseConfig = {
+        apiKey: "AIzaSyDguNf-sooubRJbfMJPsKSE6LTa7mQwMwM",
+        authDomain: "umoja-assist.firebaseapp.com",
+        projectId: "umoja-assist",
+        storageBucket: "umoja-assist.appspot.com",
+        messagingSenderId: "716904160676",
+        appId: "1:716904160676:web:bba0bb7cf2919c3d3e3531",
+        measurementId: "G-9QKKGDBNS9",
+      }; 
+
+      // this.emergencyDescrp = emergency
+      // this.targetLocation = locationName
+      // this.targetLocationCoords = locationCoords
+      let app = initializeApp(firebaseConfig);
+      let db = getDatabase(app)
+      // console.log("==>",db);
+
+      // targetLocation:"",
+      // emergencyType:"",
+      // emergencyDescrp:"",
+      // targetLocationCoords:[]
+      console.log("Sending alert to respective Bodies")
+        push(ref(db,  "reponses/"), {
+        reponse:1,
+        location: this.targetLocation,
+        emergency:this.emergencyDescrp,
+        coords:this.targetLocationCoords,
+        authorityNeeded:authority
+
+        })
+        .then(() => {
+          console.log("Successs ");
+          this.helpResponded = false
+        })
+        .catch((error) => {
+          console.log(" Error : " + error);
+        });   
+    },
+    getHelp(locationName, emergency,
+      locationCoords){
+      //  location.locationdesc, location.emergencydesc, location.locationdesc, location.loc
+      this.helpResponded = true  
+      this.emergencyDescrp = emergency
+      this.targetLocation = locationName
+      this.targetLocationCoords = locationCoords
+
     },
     sendEmergencyReq() {
       // description:"",
@@ -430,18 +499,18 @@ export default {
       let issueServerity = this.degree;
      
       // let db = getDatabase(this.initRequest);
-      const firebaseConfig = {
-        apiKey: "AIzaSyDguNf-sooubRJbfMJPsKSE6LTa7mQwMwM",
-        authDomain: "umoja-assist.firebaseapp.com",
-        projectId: "umoja-assist",
-        storageBucket: "umoja-assist.appspot.com",
-        messagingSenderId: "716904160676",
-        appId: "1:716904160676:web:bba0bb7cf2919c3d3e3531",
-        measurementId: "G-9QKKGDBNS9",
-      };
-      let app = initializeApp(firebaseConfig);
-      let db = getDatabase(app)
-      console.log("==>",db)
+      // const firebaseConfig = {
+      //   apiKey: "AIzaSyDguNf-sooubRJbfMJPsKSE6LTa7mQwMwM",
+      //   authDomain: "umoja-assist.firebaseapp.com",
+      //   projectId: "umoja-assist",
+      //   storageBucket: "umoja-assist.appspot.com",
+      //   messagingSenderId: "716904160676",
+      //   appId: "1:716904160676:web:bba0bb7cf2919c3d3e3531",
+      //   measurementId: "G-9QKKGDBNS9",
+      // };
+      // let app = initializeApp(firebaseConfig);
+      // let db = getDatabase(app)
+      // console.log("==>",db)
      push(ref(db,  "emergencies/"), {
         user_name: 'Jonna Jina',
         location_lat: 1.3053 , 
@@ -508,7 +577,48 @@ export default {
 
       
 
+    },
+    ambulanceAlert(){
+    this.ambulance = !this.ambulance
+    if(this.ambulance === true){
+      this.callAuthorities("Ambulance")
+    }else{
+      console.log("None requested")
     }
+    },
+    policeAlert(){
+    this.police = true
+     if(this.police === true){
+      this.callAuthorities("Police Force")
+       this.police = !this.police
+    }else{
+      console.log("None requested")
+    }
+    },
+    fireHydrenAlert(){
+        this.fireHydren = true
+         if(this.fireHydren === true){
+      this.callAuthorities("FireFighters ")
+      this.fireHydren = !this.fireHydren
+    }else{
+      console.log("None requested")
+    }
+    },
+    breakDownAlert(){
+      this.breakDown = true
+      console.log("break down : ", this.breakDown)
+     if(this.breakDown == true){
+      this.callAuthorities("Break Down Vehicle")
+      this.breakDown = !this.breakDown
+    }else{
+      console.log("None requested")
+    }
+    },
+    //TODO: i am in Danger 
+    iAmInDanger(){
+      this.showForm = true
+    }
+
   },
   async beforeMount() {
     // HERE is where to load Leaflet components!
@@ -519,6 +629,18 @@ export default {
     this.mapIsReady = true;
   },
   mounted(){
+      const firebaseConfig = {
+        apiKey: "AIzaSyDguNf-sooubRJbfMJPsKSE6LTa7mQwMwM",
+        authDomain: "umoja-assist.firebaseapp.com",
+        projectId: "umoja-assist",
+        storageBucket: "umoja-assist.appspot.com",
+        messagingSenderId: "716904160676",
+        appId: "1:716904160676:web:bba0bb7cf2919c3d3e3531",
+        measurementId: "G-9QKKGDBNS9",
+      };
+      let app = initializeApp(firebaseConfig);
+      let db = getDatabase(app)
+      console.log("==>",db);
     this.getAllData();
       }
 };
