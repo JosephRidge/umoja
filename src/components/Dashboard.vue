@@ -358,7 +358,8 @@
         </div>
       </div>
       <!-- TODO: test modal  -->
-      <HelpFormVue class="h-modal fixed z-50"/>
+      <HelpFormVue v-if="showForm === false" 
+       class="bg-darkBlue bg-opacity-50 absolute inset-0 flex"/>
       
     </l-map>
   </div>
