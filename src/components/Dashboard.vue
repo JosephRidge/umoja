@@ -357,6 +357,8 @@
   <!-- Toast message End -->
         </div>
       </div>
+      <!-- TODO: test modal  -->
+      <HelpFormVue class="h-modal fixed z-50"/>
       
     </l-map>
   </div>
