@@ -3,7 +3,7 @@
     <l-map
       style="height: 100vh; width: 100vw; overflow: hidden"
       class="relative"
-      :zoom="zoom"
+      :zoom="8"
       :minZoom="5.5"
       :center="centerboundsOfKenya"
       :maxBounds="bounds"
@@ -15,11 +15,38 @@
         layer-type="base"
         name="OpenStreetMap"
       ></l-tile-layer>
-   
-      <l-marker v-for="location in locations" :key="location"
-      :lat-lng="location" >
+    
+      <l-marker v-for="location in locations" 
+      :key="location"
+      :lat-lng="location.loc" >
       <l-icon  icon-url="src/assets/images/inaid.png" class="shadow-xl"></l-icon>
-      <l-popup> hey there ineed help ! </l-popup>
+      <l-popup class="my-5 w-auto"> 
+      
+       <div class="font-semibold text-darkBlue  "> Hi, my name is <span class="text-dark-orange"> {{location.username}}
+       </span> 
+       </div>
+       <div class="font-semibold text-darkBlue my-1  "> My Location :  <span class="font-bold text-dark-orange"> {{location.locationdesc}}</span></div>
+       <div class="font-bold rounded-xl shadow-xl bg-orange py-1 px-3 capitalize text-xs text-center mb-2">  <span class="text-white"> {{location.emergencydesc}} ! </span>
+       
+       </div>
+           <div> 
+          <button
+          @click="getHelp(location.locationdesc, location.emergencydesc, location.loc)"
+           class=" text-darkBlue 
+            rounded
+            font-bold py-1 px-3 mx-2 
+            shadow  border hover:border-2 
+            border-orange 
+            hover:transition
+            hover:ease-in-out
+            hover:duration-300   
+            float-right          
+            "> 
+            <div class=""> Help {{location.username}}</div>            
+          </button> 
+         </div>  
+         <div class="text-white"> . </div>
+        </l-popup>
       </l-marker>  
     <l-marker   :lat-lng="[-1.3071, 36.8155]" >
       <l-icon  icon-url="src/assets/images/me.png" class="shadow-xl"></l-icon>
@@ -42,18 +69,18 @@
           hover:text-primaryYellow
         "
       />
-     
       <div class="flex flex-col justify-items-stretch overflow-hidden py-12">
        <div class="flex justify-between flex-col">
- 
- <details class="
-              z-400
-              bg-white
-              divide-y  
-              w-72              
-              transition ease-in-out duration-700
-              mb-5
-              mx-10
+   
+
+<details class=" 
+            z-400
+            bg-white
+            divide-y  
+            w-72              
+            transition ease-in-out duration-700
+            mb-5
+            mx-10
             rounded-xl
             hover:transition
             hover:duration-700
@@ -78,10 +105,9 @@
             hover:duration-300 
             hover:ease-in-out  
             capitalize
-            text-center
-             
+            text-center             
           "
-        >
+        > 
           <!-- TODO: remove hiddedb attrib -->
           <span class="text-base text-base font-bold px-2">
            Current Number
@@ -92,6 +118,7 @@
           </div>
         </div>
       </details>
+ 
     <details class="
               z-400
               bg-white
@@ -133,8 +160,7 @@
           </div> 
              </div>
              </details>
-             
-             <details class="
+           <details class="
             z-400
             mx-10
             mb-5
@@ -217,95 +243,11 @@
             rounded-xl
             hover:border-primaryYellow hover:border-2
             capitalize
-          "
-        >
+          ">
           <div class="text-xs text-darkBlue font-bold px-6 py-2">
             If you are close
             <span class="text-primaryYellow font-bold">Tap Marker</span> to
             <span class="text-primaryYellow">help</span> out a brother/ sister
-
-            <!-- TODO: Start of trial Data once done  -->
-            <!-- <div class="mx-2 my-3">
-              Coordinates :
-              <input
-                v-model="location_coordinate"
-                placeholder="0.00,0.00"
-                class="text-textgray rounded-2xl h-12 w-80 text-center"
-              />
-            </div>
-            <div class="mx-2 my-3">
-              Degree :
-              <input
-                v-model="degree"
-                placeholder="medium"
-                class="text-textgray rounded-2xl h-12 w-80 text-center"
-              />
-            </div>
-            <div class="mx-2 my-3">
-              UserName
-              <input
-                v-model="user_name"
-                placeholder="Mike Mac Mike"
-                class="text-textgray rounded-2xl h-12 w-80 text-center"
-              />
-            </div>
-            <div class="mx-2 my-3">
-              Location DEtails :
-              <input
-                v-model="exact_location"
-                placeholder="Makadara law courts"
-                class="text-textgray rounded-2xl h-12 w-80 text-center"
-              />
-            </div> -->
-            <!-- <div class="mx-2 my-3">
-              Tell us More :
-              <input
-                v-model="description"
-                placeholder="lorem lorem wololo"
-                class="text-textgray rounded-2xl h-12 w-80 text-center"
-              />
-            </div> -->
-            <!-- TODO: End of trial Data once done  -->
-<!-- 
-            <button
-              v-on:click="sendEmergencyReq()"
-              class="
-                py-3
-                px-7
-                ml-20
-                hover:transition
-                hover:duration-300
-                hover:-translate-y-1
-                hover:ease-in-out
-                hover:shadow-2xl
-                rounded-full
-                bg-green
-                text-white
-                font-bold
-              "
-            >
-              Yes
-            </button> -->
-            <!-- <button
-              class="
-                py-3
-                px-8
-                mx-3
-                font-bold
-                hover:transition
-                hover:duration-300
-                hover:-translate-y-1
-                hover:ease-in-out
-                hover:shadow-2xl
-                rounded-full
-                bg-red
-                text-white
-              "
-            >
-              No
-            </button> -->
-            
-          
           </div>
           <!-- Contains  icon images of the police car, ambulance and fire hydren-->
           <div class="bg-lightGray h-3 text-transparent"> </div>
@@ -320,6 +262,7 @@
        
           <div class="py-2 grid grid-cols-2 text-center ">      
             <button
+            @click="policeAlert()"
               class="
                 mx-6
                 pb-3
@@ -339,6 +282,7 @@
             </button> 
              
             <button
+            @click="fireHydrenAlert()"
               class="
                 mx-3
                 pb-3 
@@ -359,6 +303,7 @@
               />
             </button>
             <button
+            @click="breakDownAlert()"
               class="
                 mx-6
                 mb-2 
@@ -378,6 +323,7 @@
               />
             </button> 
               <button
+              @click="breakDownAlert()"
               class="
                 mx-3 
                 my-2
@@ -401,9 +347,19 @@
        </details>
                       
         </div>
-
+  <!-- Toast message Start -->
+    <div v-if="helpResponded === true" 
+      :class=" 
+      'z-400 float-right w-80 mx-60 shadow items-center transition ease-in-out delay-300 bg-green border-l-4 rounded-2xl border-red-500 text-white p-4'  " role="alert">
+  <p class="font-bold">Success</p>
+  <p>Kindly Select the Emergency group to proceed.</p>
+</div>
+  <!-- Toast message End -->
         </div>
       </div>
+      <!-- TODO: test modal  -->
+      <HelpFormVue  @closeDialog="closeDialogForm" v-if="showForm === true"
+       class="bg-darkBlue bg-opacity-50 absolute inset-0 flex"/>
       
     </l-map>
   </div>
@@ -415,6 +371,7 @@ import { LMap, LTileLayer, LMarker,LPopup,LIcon } from "@vue-leaflet/vue-leaflet
 import TopNavigationBar from "./TopNavigationBar.vue";
 import { getDatabase, ref, set,push, onValue } from "firebase/database";
 import { initializeApp } from "firebase/app";
+import HelpFormVue from "./HelpForm.vue";
 export default {
   components: {
     LMap,
@@ -422,7 +379,8 @@ export default {
     TopNavigationBar,
     LMarker,
     LPopup,
-    LIcon
+    LIcon,
+    HelpFormVue
   },
   data() {
     return {
@@ -437,8 +395,7 @@ export default {
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       attribution:
         '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-
-      markerLatLng: [51.504, -0.159],
+ 
       iconWidth: 45,
       iconHeight: 40,
       iconSize: 64,
@@ -468,9 +425,73 @@ export default {
       markerObjects: null,
       numberOfPeopleInNeed: 100,
       responses: 80,
-    };
+      helpResponded:false,
+      ambulance:false,
+      police:false,
+      breakDown:false,
+      fireHydren:false, 
+      targetLocation:"",
+      emergencyType:"",
+      emergencyDescrp:"",
+      targetLocationCoords:[],
+      showForm:false  
+       };
   },
   methods: {
+    closeDialogForm(event){
+      console.log(" === > ",  event)
+       this.showForm =  !event
+      console.log(" === > dgf ",this.showForm)
+    },
+    callAuthorities(authority){ 
+      console.log(" authoritu ", authority)
+      const firebaseConfig = {
+        apiKey: "AIzaSyDguNf-sooubRJbfMJPsKSE6LTa7mQwMwM",
+        authDomain: "umoja-assist.firebaseapp.com",
+        projectId: "umoja-assist",
+        storageBucket: "umoja-assist.appspot.com",
+        messagingSenderId: "716904160676",
+        appId: "1:716904160676:web:bba0bb7cf2919c3d3e3531",
+        measurementId: "G-9QKKGDBNS9",
+      }; 
+
+      // this.emergencyDescrp = emergency
+      // this.targetLocation = locationName
+      // this.targetLocationCoords = locationCoords
+      let app = initializeApp(firebaseConfig);
+      let db = getDatabase(app)
+      // console.log("==>",db);
+
+      // targetLocation:"",
+      // emergencyType:"",
+      // emergencyDescrp:"",
+      // targetLocationCoords:[]
+      console.log("Sending alert to respective Bodies")
+        push(ref(db,  "reponses/"), {
+        reponse:1,
+        location: this.targetLocation,
+        emergency:this.emergencyDescrp,
+        coords:this.targetLocationCoords,
+        authorityNeeded:authority
+
+        })
+        .then(() => {
+          console.log("Successs ");
+          this.helpResponded = false
+        })
+        .catch((error) => {
+          console.log(" Error : " + error);
+        });   
+    },
+    getHelp(locationName, emergency,
+      locationCoords){
+      //  location.locationdesc, location.emergencydesc, location.locationdesc, location.loc
+      this.helpResponded = true  
+      this.emergencyDescrp = emergency
+      this.targetLocation = locationName
+      this.targetLocationCoords = locationCoords
+
+    },
     sendEmergencyReq() {
       // description:"",
       let emergencyDescription = this.description;
@@ -484,18 +505,18 @@ export default {
       let issueServerity = this.degree;
      
       // let db = getDatabase(this.initRequest);
-      const firebaseConfig = {
-        apiKey: "AIzaSyDguNf-sooubRJbfMJPsKSE6LTa7mQwMwM",
-        authDomain: "umoja-assist.firebaseapp.com",
-        projectId: "umoja-assist",
-        storageBucket: "umoja-assist.appspot.com",
-        messagingSenderId: "716904160676",
-        appId: "1:716904160676:web:bba0bb7cf2919c3d3e3531",
-        measurementId: "G-9QKKGDBNS9",
-      };
-      let app = initializeApp(firebaseConfig);
-      let db = getDatabase(app)
-      console.log("==>",db)
+      // const firebaseConfig = {
+      //   apiKey: "AIzaSyDguNf-sooubRJbfMJPsKSE6LTa7mQwMwM",
+      //   authDomain: "umoja-assist.firebaseapp.com",
+      //   projectId: "umoja-assist",
+      //   storageBucket: "umoja-assist.appspot.com",
+      //   messagingSenderId: "716904160676",
+      //   appId: "1:716904160676:web:bba0bb7cf2919c3d3e3531",
+      //   measurementId: "G-9QKKGDBNS9",
+      // };
+      // let app = initializeApp(firebaseConfig);
+      // let db = getDatabase(app)
+      // console.log("==>",db)
      push(ref(db,  "emergencies/"), {
         user_name: 'Jonna Jina',
         location_lat: 1.3053 , 
@@ -545,13 +566,67 @@ export default {
         console.log(" - - > ",typeof(data), "-- >", Object.values(data));
         for(let i = 0; i<Object.values(data).length ; i++){
             let loc = [Object.values(data)[i].location_lat,Object.values(data)[i].location_lng ]
-            this.locations.push(loc)
+            let emergencydescription = Object.values(data)[i].emergency_description
+            let username = Object.values(data)[i].user_name 
+            let locationdesc = Object.values(data)[i].exact_location
+            let details = {
+              'username':username,
+              'emergencydesc': emergencydescription,
+              'locationdesc':locationdesc,
+              'loc':loc,
+            }
+            console.log("details > ", details)
+            // this.locations.push(loc)
+             this.locations.push(details)
           }
      })
 
       
 
+    },
+    ambulanceAlert(){
+    this.ambulance = !this.ambulance
+    
+    if(this.ambulance === true){
+      this.callAuthorities("Ambulance")
+    }else{
+      console.log("None requested")
     }
+    },
+    policeAlert(){
+    this.police = true
+     if(this.police === true){
+      this.callAuthorities("Police Force")
+       this.police = !this.police
+    }else{
+      console.log("None requested")
+    }
+    },
+    fireHydrenAlert(){
+        this.fireHydren = true
+         if(this.fireHydren === true){
+      this.callAuthorities("FireFighters ")
+      this.fireHydren = !this.fireHydren
+    }else{
+      console.log("None requested")
+    }
+    },
+    breakDownAlert(){
+      this.breakDown = true
+      console.log("break down : ", this.breakDown)
+     if(this.breakDown == true){
+      this.callAuthorities("Break Down Vehicle")
+      this.breakDown = !this.breakDown
+    this.showForm = !this.showForm 
+    }else{
+      console.log("None requested")
+    }
+    },
+    //TODO: i am in Danger 
+    iAmInDanger(){
+      this.showForm = true
+    }
+
   },
   async beforeMount() {
     // HERE is where to load Leaflet components!
@@ -562,6 +637,18 @@ export default {
     this.mapIsReady = true;
   },
   mounted(){
+      const firebaseConfig = {
+        apiKey: "AIzaSyDguNf-sooubRJbfMJPsKSE6LTa7mQwMwM",
+        authDomain: "umoja-assist.firebaseapp.com",
+        projectId: "umoja-assist",
+        storageBucket: "umoja-assist.appspot.com",
+        messagingSenderId: "716904160676",
+        appId: "1:716904160676:web:bba0bb7cf2919c3d3e3531",
+        measurementId: "G-9QKKGDBNS9",
+      };
+      let app = initializeApp(firebaseConfig);
+      let db = getDatabase(app)
+      console.log("==>",db);
     this.getAllData();
       }
 };
