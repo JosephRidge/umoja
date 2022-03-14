@@ -19,10 +19,32 @@
       <l-marker v-for="location in locations" :key="location"
       :lat-lng="location.loc" >
       <l-icon  icon-url="src/assets/images/inaid.png" class="shadow-xl"></l-icon>
-      <l-popup class="my-5"> 
-        <div class="font-semibold text-darkBlue  "> Hi, my name is <span class="text-dark-orange"> {{location.username}} </span></div>
-        <div class="font-semibold text-darkBlue my-1  "> My Location :  <span class="font-bold text-dark-orange"> {{location.locationdesc}}</span></div>
-       <div class="font-bold rounded-xl shadow-xl bg-orange py-1 px-3 capitalize text-xs text-center">  <span class="text-white"> {{location.emergencydesc}} ! </span></div>
+      <l-popup class="my-5 w-auto"> 
+      
+       <div class="font-semibold text-darkBlue  "> Hi, my name is <span class="text-dark-orange"> {{location.username}}
+       </span> 
+       </div>
+       <div class="font-semibold text-darkBlue my-1  "> My Location :  <span class="font-bold text-dark-orange"> {{location.locationdesc}}</span></div>
+       <div class="font-bold rounded-xl shadow-xl bg-orange py-1 px-3 capitalize text-xs text-center mb-2">  <span class="text-white"> {{location.emergencydesc}} ! </span>
+       
+       </div>
+           <div> 
+          <button
+          @click="getHelp(location.locationdesc, location.emergencydesc)"
+           class=" text-darkBlue 
+            rounded
+            font-bold py-1 px-3 mx-2 
+            shadow  border hover:border-2 
+            border-orange 
+            hover:transition
+            hover:ease-in-out
+            hover:duration-300   
+            float-right          
+            "> 
+            <div class=""> Help {{location.username}}</div>            
+          </button> 
+         </div>  
+         <div class="text-white"> . </div>
         </l-popup>
       </l-marker>  
     <l-marker   :lat-lng="[-1.3071, 36.8155]" >
@@ -221,95 +243,11 @@
             rounded-xl
             hover:border-primaryYellow hover:border-2
             capitalize
-          "
-        >
+          ">
           <div class="text-xs text-darkBlue font-bold px-6 py-2">
             If you are close
             <span class="text-primaryYellow font-bold">Tap Marker</span> to
             <span class="text-primaryYellow">help</span> out a brother/ sister
-
-            <!-- TODO: Start of trial Data once done  -->
-            <!-- <div class="mx-2 my-3">
-              Coordinates :
-              <input
-                v-model="location_coordinate"
-                placeholder="0.00,0.00"
-                class="text-textgray rounded-2xl h-12 w-80 text-center"
-              />
-            </div>
-            <div class="mx-2 my-3">
-              Degree :
-              <input
-                v-model="degree"
-                placeholder="medium"
-                class="text-textgray rounded-2xl h-12 w-80 text-center"
-              />
-            </div>
-            <div class="mx-2 my-3">
-              UserName
-              <input
-                v-model="user_name"
-                placeholder="Mike Mac Mike"
-                class="text-textgray rounded-2xl h-12 w-80 text-center"
-              />
-            </div>
-            <div class="mx-2 my-3">
-              Location DEtails :
-              <input
-                v-model="exact_location"
-                placeholder="Makadara law courts"
-                class="text-textgray rounded-2xl h-12 w-80 text-center"
-              />
-            </div> -->
-            <!-- <div class="mx-2 my-3">
-              Tell us More :
-              <input
-                v-model="description"
-                placeholder="lorem lorem wololo"
-                class="text-textgray rounded-2xl h-12 w-80 text-center"
-              />
-            </div> -->
-            <!-- TODO: End of trial Data once done  -->
-<!-- 
-            <button
-              v-on:click="sendEmergencyReq()"
-              class="
-                py-3
-                px-7
-                ml-20
-                hover:transition
-                hover:duration-300
-                hover:-translate-y-1
-                hover:ease-in-out
-                hover:shadow-2xl
-                rounded-full
-                bg-green
-                text-white
-                font-bold
-              "
-            >
-              Yes
-            </button> -->
-            <!-- <button
-              class="
-                py-3
-                px-8
-                mx-3
-                font-bold
-                hover:transition
-                hover:duration-300
-                hover:-translate-y-1
-                hover:ease-in-out
-                hover:shadow-2xl
-                rounded-full
-                bg-red
-                text-white
-              "
-            >
-              No
-            </button> -->
-            
-          
           </div>
           <!-- Contains  icon images of the police car, ambulance and fire hydren-->
           <div class="bg-lightGray h-3 text-transparent"> </div>
@@ -475,6 +413,10 @@ export default {
     };
   },
   methods: {
+    getHelp(target_location, emergency){
+      console.log("CCCCCcc")
+      console.log(" Challenge",target_location,emergency )
+    },
     sendEmergencyReq() {
       // description:"",
       let emergencyDescription = this.description;
