@@ -259,11 +259,7 @@
        <details class="my-4 content-center px-3" >
          <summary  class="mx-4 text-xs text-darkBlue font-bold "> <span class="text-primaryYellow mr-2">
            Select</span>  Emergency Group to alert</summary> 
-         <!-- <div class="text-xs text-darkBlue font-bold px-4 pt-2 flex items-center">
-            <span class="text-primaryYellow mr-2">Select </span> the reinforcement
-            needed at the emergency site
-         </div> -->
-       
+
           <div class="py-2 grid grid-cols-2 text-center ">      
             <button
             @click="policeAlert()"
@@ -363,7 +359,7 @@
       </div>
       <!-- TODO: test modal  -->
       <HelpForm @closeDialog="closeDialogForm" v-if="showForm === true"
-       class="bg-darkBlue bg-opacity-50 absolute inset-0 flex"/>
+       class="bg-gray bg-opacity-50 absolute inset-0 flex"/>
       
       <HelpForm2 @dangerDetails="dangerDetailsForm"  @closeModal="closeModalForm" v-if="showForm2 === true"
        class="bg-yellow bg-opacity-50 absolute inset-0 flex"/>
@@ -462,6 +458,7 @@ export default {
     //emmitted value from heplForm2 --  dedicated for the individual in danger but not the current user
     dangerDetailsForm(event){
       console.log("userChallnge --- > ", event)
+      this.postToFirebase(event)
       if(event.success === true ){ 
         this.showForm2 = false
       }
@@ -515,22 +512,8 @@ export default {
       // user_name:"",
       let userName = this.user_name;
       // degree:"",
-      let issueServerity = this.degree;
-     
-      // let db = getDatabase(this.initRequest);
-      // const firebaseConfig = {
-      //   apiKey: "AIzaSyDguNf-sooubRJbfMJPsKSE6LTa7mQwMwM",
-      //   authDomain: "umoja-assist.firebaseapp.com",
-      //   projectId: "umoja-assist",
-      //   storageBucket: "umoja-assist.appspot.com",
-      //   messagingSenderId: "716904160676",
-      //   appId: "1:716904160676:web:bba0bb7cf2919c3d3e3531",
-      //   measurementId: "G-9QKKGDBNS9",
-      // };
-      // let app = initializeApp(firebaseConfig);
-      // let db = getDatabase(app)
-      // console.log("==>",db)
-     push(ref(db,  "emergencies/"), {
+      let issueServerity = this.degree; 
+      push(ref(db,  "emergencies/"), {
         user_name: 'Jonna Jina',
         location_lat: 1.3053 , 
         location_lng:36.8247,
@@ -605,6 +588,36 @@ export default {
     }else{
       console.log("None requested")
     }
+    },
+
+    postToFirebase(details){
+        console.log("detals = ", details )
+         const firebaseConfig = {
+        apiKey: "AIzaSyDguNf-sooubRJbfMJPsKSE6LTa7mQwMwM",
+        authDomain: "umoja-assist.firebaseapp.com",
+        projectId: "umoja-assist",
+        storageBucket: "umoja-assist.appspot.com",
+        messagingSenderId: "716904160676",
+        appId: "1:716904160676:web:bba0bb7cf2919c3d3e3531",
+        measurementId: "G-9QKKGDBNS9",
+      };
+      let app = initializeApp(firebaseConfig);
+      let db = getDatabase(app)
+      console.log("==>",db);  
+       push(ref(db,  "emergencies/"), {
+        user_name: ' ',
+        location_lat: details.lat , 
+        location_lng:details.lng,
+        exact_location: details.location,
+        emergency_description: details.emergency,
+        button_clicks: 5,
+      })
+        .then(() => {
+          console.log("Successs ");
+        })
+        .catch((error) => {
+          console.log(" Error : " + error);
+        });
     },
     policeAlert(){
     this.police = true
