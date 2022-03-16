@@ -40,15 +40,18 @@ methods: {
     closeModalDialog(){   
               const closeButtons = document.querySelector('#closeButton')
                console.log("clicked")
-                //   closeButtons.classList.add('')
-
-        //   window.addEventListener('DOMContentloaded',()=>{
-        //       const closeButtons = document.querySelector('#closeButton')
-        //       closeButtons.addEventListener('click',()=>{
-        //           console.log("clicked")
-        //           closeButtons.classList.add('hidden')
-        //       })
-        //   })
+      },
+         getExactLocation(){
+          if(navigator.geolocation){
+              navigator.geolocation.getCurrentPosition(this.showPostion)
+                        }
+                        else{
+                            console.log("Geolocation is not supported in this browser")
+                        }
+      },
+      showPostion(position){
+          console.log("LAT : ", position.coords.latitude)
+          console.log("LNG : ", position.coords.longitude)
       }
 }
 }

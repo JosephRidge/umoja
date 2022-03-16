@@ -192,6 +192,7 @@
           </span> -->
           <div></div>
           <button
+
             class="
               rounded-full
               bg-primaryYellow
@@ -206,10 +207,12 @@
               hover:transition hover:duration-300 hover:-translate-y-1
             "
             v-on="click"
+            @click="someoneInDanger()"
           >
            Is Someone in Danger ?
           </button>
           <button
+          @click="iAmInDanger()"
             class="
               rounded-full
               bg-red
@@ -229,6 +232,7 @@
              </details>
                 <!-- Public bodies Buttons -->
         <div
+        
           class="
             z-400
             flex flex-col
@@ -358,9 +362,12 @@
         </div>
       </div>
       <!-- TODO: test modal  -->
-      <HelpFormVue  @closeDialog="closeDialogForm" v-if="showForm === true"
+      <HelpForm @closeDialog="closeDialogForm" v-if="showForm === true"
        class="bg-darkBlue bg-opacity-50 absolute inset-0 flex"/>
       
+      <HelpForm2 @dangerDetails="dangerDetailsForm"  @closeModal="closeModalForm" v-if="showForm2 === true"
+       class="bg-yellow bg-opacity-50 absolute inset-0 flex"/>
+     
     </l-map>
   </div>
 </template>
@@ -371,7 +378,8 @@ import { LMap, LTileLayer, LMarker,LPopup,LIcon } from "@vue-leaflet/vue-leaflet
 import TopNavigationBar from "./TopNavigationBar.vue";
 import { getDatabase, ref, set,push, onValue } from "firebase/database";
 import { initializeApp } from "firebase/app";
-import HelpFormVue from "./HelpForm.vue";
+import HelpForm from "./HelpForm.vue";
+import HelpForm2 from "./HelpForm2.vue";
 export default {
   components: {
     LMap,
@@ -380,7 +388,8 @@ export default {
     LMarker,
     LPopup,
     LIcon,
-    HelpFormVue
+    HelpForm,
+    HelpForm2
   },
   data() {
     return {
@@ -434,17 +443,31 @@ export default {
       emergencyType:"",
       emergencyDescrp:"",
       targetLocationCoords:[],
-      showForm:false  
+      showForm:false, // this form focuses on your details of what the emergency id about
+      showForm2:false, // This form focuses on the calling for help for someone else
        };
   },
   methods: {
+    // this method captures the emitted value from the child component -> HelpForm
     closeDialogForm(event){
       console.log(" === > ",  event)
        this.showForm =  !event
       console.log(" === > dgf ",this.showForm)
     },
+    closeModalForm(event){
+      if(event === true){
+        this.showForm2 = false
+      }
+    },
+    //emmitted value from heplForm2 --  dedicated for the individual in danger but not the current user
+    dangerDetailsForm(event){
+      console.log("userChallnge --- > ", event)
+      if(event.success === true ){ 
+        this.showForm2 = false
+      }
+    },
     callAuthorities(authority){ 
-      console.log(" authoritu ", authority)
+      console.log(" authority :  ", authority)
       const firebaseConfig = {
         apiKey: "AIzaSyDguNf-sooubRJbfMJPsKSE6LTa7mQwMwM",
         authDomain: "umoja-assist.firebaseapp.com",
@@ -454,18 +477,9 @@ export default {
         appId: "1:716904160676:web:bba0bb7cf2919c3d3e3531",
         measurementId: "G-9QKKGDBNS9",
       }; 
-
-      // this.emergencyDescrp = emergency
-      // this.targetLocation = locationName
-      // this.targetLocationCoords = locationCoords
+ 
       let app = initializeApp(firebaseConfig);
-      let db = getDatabase(app)
-      // console.log("==>",db);
-
-      // targetLocation:"",
-      // emergencyType:"",
-      // emergencyDescrp:"",
-      // targetLocationCoords:[]
+      let db = getDatabase(app) 
       console.log("Sending alert to respective Bodies")
         push(ref(db,  "reponses/"), {
         reponse:1,
@@ -480,12 +494,11 @@ export default {
           this.helpResponded = false
         })
         .catch((error) => {
-          console.log(" Error : " + error);
+          console.log("Error : " + error);
         });   
     },
     getHelp(locationName, emergency,
-      locationCoords){
-      //  location.locationdesc, location.emergencydesc, location.locationdesc, location.loc
+      locationCoords){     
       this.helpResponded = true  
       this.emergencyDescrp = emergency
       this.targetLocation = locationName
@@ -624,8 +637,13 @@ export default {
     },
     //TODO: i am in Danger 
     iAmInDanger(){
-      this.showForm = true
-    }
+      this.showForm = true  
+      this.showForm2 = false
+    },
+    someoneInDanger(){
+     this.showForm2 = true
+     this.showForm = false
+    }, 
 
   },
   async beforeMount() {
