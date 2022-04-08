@@ -1,3 +1,84 @@
+# What is Umoja ? 
+
+```
+Umoja is a Crowd-Sourcing platform that enables users to to call out for help to the closest people, to their vicinity, whom will later on respond by either calling out for help to the repective authorities or going to the victims location and give out physical aid.
+
+```
+
+# Why Umoja ? 
+```
+With the increase in crime rates and Gender Based Violence , the site aims to reduce turn around time, when it comes to emergency response.
+
+The platform provides a medium to seek assistance in : 
+
+  - Medical
+
+  - Any form of Violence eg GBV, Mugging, Mob-Justice, Kidnapping, Robbery, Arsony, amongst all recorded within the Law and/or anything that goes against humanity.
+
+  - Fire related emergency
+
+  - Car Break-Down services , stuck wherever location .
+
+  
+
+```
+
+# How ?
+
+## First Create Account  :  
+```
+- Create an account
+- Login
+ ```
+
+##  If you are in need of help : 
+```
+
+- Allow Platform to get your location by accepting the permissions.
+- Navigate to "Are you In Danger ?" section
+- Click either the red (SUPER URGENT!) or orange button to request.
+```
+
+##  If you see someone in need of Help  : 
+
+``` 
+Allow Platform to get your location
+- Check victims location 
+
+- Tap their marker/ location pin
+
+- tap the Help {victim_names} 
+
+- you will see a green notification card pop up
+
+- click on " Select Emeregency Group to Alert"
+
+- select the respective Emergenecy group needed eg police, fire-fighters, Ambulance etc.
+
+- A pop up form will appear
+
+- Input details of the help needed now click send and the athorities will be alerted.
+```
+
+# Value Ad
+- Reduce Turn around time to emergency response
+- Save more lives
+- Understand regions with high emeregencies and understance ways to mitigate or reduce levels
+
+
+
+The web version of this platform Uses the following technologies : 
+- Firebase RealTime DB 
+- Firebase Hosting
+- Vue3 + Vite
+- TailwindCSS
+
+Common Languages : 
+- JavaScript
+- HTML
+- CSS
+
+
 # Vue 3 + Vite
 
 This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
