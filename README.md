@@ -66,7 +66,6 @@ Allow Platform to get your location
 - Understand regions with high emeregencies and understance ways to mitigate or reduce levels
 
 
-
 The web version of this platform Uses the following technologies : 
 - Firebase RealTime DB 
 - Firebase Hosting
