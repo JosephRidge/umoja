@@ -100,3 +100,17 @@ Add the follwing :
  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>```  
+
+```
+
+# State Management using Pinia 
+For the state management we will use [Pinia](https://vuejs.org/guide/scaling-up/state-management.html#pinia) an optimized vue store.As opposed to vuex due to its optimized mode plus Vuex maintenance has officically been stopped as Vue5 will be fully using [Pinia](https://vuejs.org/guide/scaling-up/state-management.html#pinia). 
+
+## Implementation  : 
+npm install pinia 
+
+import { createPinia } from 'pinia'
+
+app.use(createPinia()) pinia 
+
+<!-- It might be a hustle intsalling pinina via aplugin you may be forece to use --force -->
