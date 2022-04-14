@@ -36,7 +36,7 @@ The platform provides a medium to seek assistance in :
 
 - Allow Platform to get your location by accepting the permissions.
 - Navigate to "Are you In Danger ?" section
-- Click either the red (SUPER URGENT!) or orange button to request.
+- Click either the RED (SUPER URGENT!) or ORANGE button to request.
 ```
 
 ##  If you see someone in need of Help  : 
@@ -51,7 +51,7 @@ Allow Platform to get your location
 
 - you will see a green notification card pop up
 
-- click on " Select Emeregency Group to Alert"
+- click on " Select Emergency Group to Alert"
 
 - select the respective Emergenecy group needed eg police, fire-fighters, Ambulance etc.
 
