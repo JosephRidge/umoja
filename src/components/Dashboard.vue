@@ -373,6 +373,7 @@ import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer, LMarker,LPopup,LIcon } from "@vue-leaflet/vue-leaflet";
 import TopNavigationBar from "./TopNavigationBar.vue";
 import { getDatabase, ref, set,push, onValue } from "firebase/database";
+import { getAuth } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import HelpForm from "./HelpForm.vue";
 import HelpForm2 from "./HelpForm2.vue";
@@ -680,6 +681,18 @@ export default {
       let app = initializeApp(firebaseConfig);
       let db = getDatabase(app)
       console.log("==>",db);
+      // check if user is logged in const auth = getAuth();
+       var auth = getAuth() ;
+       const user = auth.currentUser;
+     
+        console.log("User  == > ",  (user.emailVerified))
+      if (user) {
+        // User is signed in.
+        console.log("UserLogged IN == > ",JSON.stringify(user))
+      } else {
+        // No user is signed in.
+        console.log("UserLogged Not Logged !!!")
+      }
     this.getAllData();
       }
 };
