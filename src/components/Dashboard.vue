@@ -684,8 +684,7 @@ export default {
       // check if user is logged in const auth = getAuth();
        var auth = getAuth() ;
        const user = auth.currentUser;
-     
-        console.log("User  == > ",  (user.emailVerified))
+       console.log("User  == > ",  (user.emailVerified))
       if (user) {
         // User is signed in.
         console.log("UserLogged IN == > ",JSON.stringify(user))

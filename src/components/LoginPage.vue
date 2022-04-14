@@ -2,13 +2,13 @@
   <div
     class="bg-[url('src/assets/images/background-login.svg')] bg-cover h-screen w-screen flex flex-col items-center"
   >
-    <div class="rounded-2xl w-96 py-2 px-4 flex flex-col mt-32 items-center mx-auto bg-primaryYellow">
+    <div class="rounded-2xl w-96 pt-4 py-2 md:pb-2 md:pt-5  px-4 flex flex-col mt-32 items-center mx-auto bg-primaryYellow">
       <div class>
         <img src="../assets/images/Umoja.svg" alt="Community Image " loading="lazy" srcset />
       </div>
     </div>
     <div
-      class="container rounded bg-primaryYellow rounded-2xl w-96 border-4 drop-shadow-2xl border-white py-2 px-4 w-min h-min flex flex-col items-center mx-auto"
+      class="container  bg-primaryYellow rounded-2xl w-96 border-4 drop-shadow-2xl border-white py-3 px-4 w-min h-min flex flex-col items-center mx-auto"
     >
       <div class="m-2 text-center text-white font-bold text-xl">LOGIN</div>
       <div class="mx-2 my-3">
