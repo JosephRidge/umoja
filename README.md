@@ -147,4 +147,5 @@ defined using getters property in the defineState()method
 they are similar to `computed properties`, a property that calculates and returns a value, rather than just store it
 
 ## Actions
-Actions are the equivalent of methods (`objects associated to a vue instance that contain functions defined within them `) in components
+Actions are the equivalent of methods (`objects associated to a vue instance that contain functions defined within them `) in components.
+ Actions get full context to work with unlike getters that only receive an argument and are restricted to that particular argument

@@ -14,19 +14,48 @@ export const useStore = defineStore('userCredentials', {
         - in case we are not using the setUp() method and the composition API,and using the computed, methods we ues the mapState() helper function to map state properties as readonly properties
         to be able to write to this states we use mapWritableState() helper         
     */
-   
+
     state:() =>{
-        return { count: 0};
+        return { 
+            userEmail:"",
+            userAuthValid:false, 
+        };
     },
     actions:{
-        increment(val = 1 ){
-            this.count +=val
+        setUserEmail(val = "myemail@gmail.com" ){
+            this.userEmail = val
         },
-        async waitAndAdd(){
-            setTimeout(()=>{
-        this.count++
-            },2000)
-        }
+        setAuthStatus(val = false ){
+            this.userAuthValid = val
+        },
+        // Authentication
+        validateUser(auth, email, password) { 
+            signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) =>{
+              const user = userCredential.user
+              console.log("credential = >  ", user.uid)
+              router.push('/home')
+            })
+            .catch((error)=>{
+                 const errorCode = error.code;    
+      
+              
+                const errorMessage = error.message;
+                console.log(
+                  "errorr === > ",
+                  errorMessage,
+                  "error message --- > ",
+                  errorCode
+                );
+                router.push('/auth')
+              });
+          },
+
+        // async waitAndAdd(){
+        //     setTimeout(()=>{
+        // this.count++
+        //     },2000)
+        // }
     },
     // computed properties for  our store 
     getters:{
