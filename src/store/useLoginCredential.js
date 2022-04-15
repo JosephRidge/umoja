@@ -14,6 +14,7 @@ export const useStore = defineStore('userCredentials', {
         - in case we are not using the setUp() method and the composition API,and using the computed, methods we ues the mapState() helper function to map state properties as readonly properties
         to be able to write to this states we use mapWritableState() helper         
     */
+   
     state:() =>{
         return { count: 0};
     },
