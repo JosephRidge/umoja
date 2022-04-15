@@ -114,3 +114,37 @@ import { createPinia } from 'pinia'
 app.use(createPinia()) pinia 
 
 <!-- It might be a hustle intsalling pinina via aplugin you may be forece to use --force -->
+
+Defining the store : 
+A Store is basically defined using the ` defineStore()` method
+
+- We start by creating a Store directory to hold our store. 
+- Under the Store directory we create our store js file. 
+
+## State
+A state : function that returns the initial state
+        - Accessing the state can be done via crating an instance of it in  the component 
+        eg const state  = useStore()
+                state.count++
+        - REsetting the state :  this can be done by using $reset() method, as it will reset to the intial state eg
+                state.$reset()      
+        - with the setUp() method it makes it easier to work with Options API without using helper functions
+        - in case we are not using the setUp() method and the composition API,and using the computed, methods we ues the mapState() helper function to map state properties as readonly properties
+        to be able to write to this states we use mapWritableState() helper  
+       -  [Mutating the state](https://pinia.vuejs.org/core-concepts/state.html#mutating-the-state)    
+       : we can mutate the state by either  :
+        1. ` state.count++` // this referes to the count state thats is incremented
+        2. Mutating multiple states we can use the $patch({}) method
+                  ``store.$patch({
+            counter: store.counter + 1,
+            name: 'Abalam',   })``
+      - Replacing the state of a whole object : 
+          store.$state = { counter: 675, name: 'Paimon' }
+             
+## Getters  
+Receive state as first argument
+defined using getters property in the defineState()method
+they are similar to `computed properties`, a property that calculates and returns a value, rather than just store it
+
+## Actions
+Actions are the equivalent of methods (`objects associated to a vue instance that contain functions defined within them `) in components
