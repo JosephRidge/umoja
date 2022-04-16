@@ -115,6 +115,8 @@
 
 <script>
 import { initializeApp } from "firebase/app";
+import { useLoginStore } from '../store/useLoginCredential';
+import router from "../router/index.js";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -122,6 +124,10 @@ import {
 } from "firebase/auth";
 
 export default {
+  setup() {
+    const userLoginStore = useLoginStore()
+    return { userLoginStore }
+  },
   data() {
     return {
       userEmail: "",
@@ -135,7 +141,7 @@ export default {
   },
   mounted() {},
   methods: {
-    validateUser(auth) {
+    /*validateUser(auth) {
       let email = this.userEmail;
       let password = this.userPassword;
       signInWithEmailAndPassword(auth, email, password)
@@ -145,10 +151,7 @@ export default {
         router.push('/home')
       })
       .catch((error)=>{
-           const errorCode = error.code;
-
-
-        
+          const errorCode = error.code;       
           const errorMessage = error.message;
           console.log(
             "errorr === > ",
@@ -158,7 +161,7 @@ export default {
           );
           router.push('/auth')
         });
-    },
+    },  
     registerNewUser(auth) {
       console.log("clicked", this.userPassword);
       console.log("clicked", this.userEmail);
@@ -180,7 +183,7 @@ export default {
             errorCode
           );
         });
-    },
+    }, */
     switchAction() {
       if (this.action === 0) {
         this.actionPriorValidation = "Register";
@@ -202,7 +205,6 @@ export default {
         appId: "1:716904160676:web:bba0bb7cf2919c3d3e3531",
         measurementId: "G-9QKKGDBNS9",
       };
-
       initializeApp(firebaseConfig);
       console.log(
         " current actiom",
@@ -213,10 +215,17 @@ export default {
       const auth = getAuth();
       console.log(this.action, "< ---- action");
       if (this.action === 0) {
-        this.validateUser(auth);
+        // this.validateUser(auth);
+        this.userLoginStore.validateUser(auth, this.userEmail, this.userPassword)
+        if(this.userLoginStore.navigateToDashboard === true){
+          router.push('/dashboard')
+        }else{
+          router.push('/auth')
+        }
       }
       if (this.action === 1) {
-        this.registerNewUser(auth);
+        // this.registerNewUser(auth);
+        this.userLoginStore.registerNewUser(auth, this.userEmail, this.userPassword)
       } else {
         console.log(" Kindly confirm request once more . . . . .");
       }

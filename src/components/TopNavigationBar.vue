@@ -74,11 +74,19 @@
     >
       Login</router-link
     >
+    <!-- <div>{{ userLoginStore.userEmail }}</div> -->
   </div>
 </template>
 
 <script>
-export default {};
+
+import { useLoginStore } from '../store/useLoginCredential';
+export default {
+   setup() {
+    const userLoginStore = useLoginStore()
+    return { userLoginStore }
+  },
+};
 </script>
 
 <style>
