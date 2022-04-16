@@ -48,10 +48,7 @@
           hover:shadow-xl
         "
       >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates
-        quisquam velit placeat, quo repellendus assumenda excepturi distinctio
-        ab error blanditiis minus libero nesciunt eius culpa veritatis obcaecati
-        inventore quae consectetur.
+       {{ aboutUmoja }}
       </div>
       <div
         id="rightServiceSection"
@@ -70,7 +67,7 @@
         >
          Your Journey 
         </div>
-        <div class="flex flex-row px-4 py-2 text-xs">
+        <div class="grid grid-cols-2 lg:flex lg:flex-row px-4  py-2 text-xs">
           <div
             class="
               capitalize
@@ -87,8 +84,12 @@
               hover:ease-in-out
               hover:shadow-2xl
               hover:duration-300
-              h-52
-              w-44
+              lg:h-52
+              lg:w-44
+              md:h-44 
+              md:w-36           
+
+
               text-center text-darkBlue
               font-medium
               flex-col
@@ -311,6 +312,7 @@
 
 <script>
 import TopNavigationBar from "./TopNavigationBar.vue";
+import defaultMixins  from "../mixins/defaultMixins";
 export default {
   components:{
 TopNavigationBar
@@ -324,6 +326,7 @@ TopNavigationBar
   },
   mounted() {},
   methods: {},
+  mixins:[defaultMixins]
 };
 </script>
 
