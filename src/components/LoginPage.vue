@@ -68,9 +68,10 @@
 </template>
 
 <script>
-import { initializeApp } from "firebase/app";
-import router from "../router/index.js";
-import defaultMixins  from "../mixins/defaultMixins";
+import { initializeApp } from "firebase/app"; 
+import { useLoginStore } from '../store/useLoginCredential';
+import router from "../router/index.js"; 
+import defaultMixins  from "../mixins/defaultMixins"; 
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -78,6 +79,10 @@ import {
 } from "firebase/auth";
 
 export default {
+  setup() {
+    const userLoginStore = useLoginStore()
+    return { userLoginStore }
+  },
   data() {
     return {
       userEmail: "",
@@ -95,7 +100,7 @@ export default {
   mounted() { },
   mixins:[defaultMixins],
   methods: {
-    validateUser(auth) {
+    /*validateUser(auth) {
       let email = this.userEmail;
       let password = this.userPassword;
       signInWithEmailAndPassword(auth, email, password)
@@ -123,7 +128,7 @@ export default {
           this.authWelcomeSuccess = false
           this.$router.push("/auth");
         });
-    },
+    },  
     registerNewUser(auth) {
       // console.log("clicked", this.userPassword);
       // console.log("clicked", this.userEmail);
@@ -152,7 +157,7 @@ export default {
           this.authSuccess = false;
           this.authWelcomeSuccess = false
         });
-    },
+    }, */
     switchAction() {
       if (this.action === 0) {
         this.actionPriorValidation = "Register";
@@ -174,21 +179,27 @@ export default {
         appId: this.appId,
         measurementId: this.measurementId
       };
-      console.log(firebaseConfig)
-      initializeApp( firebaseConfig);
-      // console.log(
-      //   " current actiom",
-      //   this.actionPriorValidation,
-      //   "action ",
-      //   this.action
-      // );
+      initializeApp(firebaseConfig);
+      console.log(
+        " current actiom",
+        this.actionPriorValidation,
+        "action ",
+        this.action
+      );
       const auth = getAuth();
       // console.log(this.action, "< ---- action");
       if (this.action === 0) {
-        this.validateUser(auth);
+        // this.validateUser(auth);
+        this.userLoginStore.validateUser(auth, this.userEmail, this.userPassword)
+        if(this.userLoginStore.navigateToDashboard === true){
+          router.push('/dashboard')
+        }else{
+          router.push('/auth')
+        }
       }
       if (this.action === 1) {
-        this.registerNewUser(auth);
+        // this.registerNewUser(auth);
+        this.userLoginStore.registerNewUser(auth, this.userEmail, this.userPassword)
       } else {
         console.log(" Kindly confirm request once more . . . . .");
       }
