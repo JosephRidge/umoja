@@ -66,8 +66,7 @@
           rounded-xl
           shadow-2xl
           drop-shadow-2xl
-          hover:text-primaryYellow
-        "
+          hover:text-primaryYellow"
       />
       <div class="flex flex-col justify-items-stretch overflow-hidden py-12">
        <div class="flex justify-between flex-col">
@@ -474,7 +473,6 @@ export default {
         appId: "1:716904160676:web:bba0bb7cf2919c3d3e3531",
         measurementId: "G-9QKKGDBNS9",
       }; 
- 
       let app = initializeApp(firebaseConfig);
       let db = getDatabase(app) 
       console.log("Sending alert to respective Bodies")
@@ -484,7 +482,6 @@ export default {
         emergency:this.emergencyDescrp,
         coords:this.targetLocationCoords,
         authorityNeeded:authority
-
         })
         .then(() => {
           console.log("Successs ");
